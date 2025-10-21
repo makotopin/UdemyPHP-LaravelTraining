@@ -1,0 +1,15 @@
+{
+    "name": "yoshidamakoto/20251021",
+    "autoload": {
+        "psr-4": {
+            "Yoshidamakoto\\20251021\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "makotopin",
+            "email": "makotopin1016@gmail.com"
+        }
+    ],
+    "require": {}
+}
