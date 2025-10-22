@@ -6,7 +6,7 @@ namespace App\Models;
 // なので1ファイル1クラス
 class TestModel
 {
-  private $text = 'hello world';
+  private $text = 'Hello world';
 
   public function getHello(){
     return $this->text;
