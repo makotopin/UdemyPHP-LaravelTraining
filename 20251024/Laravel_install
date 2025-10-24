@@ -1,0 +1,24 @@
+## Laravelのインストール
+
+Laravelのインストールにはphpはもちろん、composerも必要になる。
+なので、composerは事前にインストールしておく必要がある。
+
+Laravel9を使用するには、PHP8以上が必要になるので以下のコマンドでPHPのバージョンを確認する
+``php -v``
+
+composerも存在を確認する
+``composer --version``
+
+Laravelのインストールには以下のコマンドを使用する
+``composer create-project laravel/laravel:^9 project-name --prefer-dist``
+
+^9をつけることで9系の最新版をインストールできる。
+--prefer-distをつけることで、distディレクトリのファイルを使用する。
+distディレクトリのファイルはLaravelの公式リポジトリにあるファイルで、
+これを使用することで、Laravelのインストールがより早くなる。
+
+Laravelのインストールが完了したら、以下のコマンドでLaravelのプロジェクトを起動する
+``php artisan serve``
+
+Laravelのプロジェクトを起動したら、以下のURLにアクセスする
+http://127.0.0.1:8000
