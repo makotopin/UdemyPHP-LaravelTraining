@@ -57,3 +57,11 @@ zsh: no such file or directory: /Applications/MAMP/Library/bin/mysql```
 3. MAMPのDBをPASSを設定
 ```echo 'export PATH="/Applications/MAMP/Library/bin/mysql80/bin:$PATH"' >> ~/.zshrc```を入力して、DBの向き先を再設定。
 
+4. .envファイルのポート指定を変更
+3306に設定されていたが、これを8889に設定。
+というのも、一般的にMySQLのポートは3306なのだが、MAMPでは8889を使用しているため
+
+ホスト名で設定した％は、たしかに「全て許可」なのだが、これは
+アクセスされる側であるDBが「どこからの接続でも許可する」という意味。
+
+今回の.envファイルに関しては、Laravel側が「どこにアクセスするか」なので、全然話が違う。
