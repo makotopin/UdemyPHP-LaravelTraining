@@ -9,8 +9,21 @@ class TestController extends Controller
 {
     public function index()
     {
+        // Eloquant。コレクション型となる
         $values = Test::all();
 
+        // countで取ったものはint型となる
+        $count = Test::count();
+
+        // findOrFailで取ったものはモデルのインスタンスとなる
+        $first = Test::findOrFail(1);
+
+        // whereで取ったものはBuilderオブジェクトとなる
+        $whereBBB = Test::where('text', 'bbb');
+        // getをつけると、コレクション型となる
+        $whereBBB = Test::where('text', 'bbb')->get();
+
+        dd($values, $count, $first, $whereBBB);
         // dd($values); // デバッグ用。これで中身を確認できる。dd = die + dump
 
         return view('tests.test', compact('values'));
