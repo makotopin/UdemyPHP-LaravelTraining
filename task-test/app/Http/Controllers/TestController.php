@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Test;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
@@ -18,12 +19,19 @@ class TestController extends Controller
         // findOrFailで取ったものはモデルのインスタンスとなる
         $first = Test::findOrFail(1);
 
-        // whereで取ったものはBuilderオブジェクトとなる
+        // whereで取ったものはBuilderオブジェクトとなる。query builderという
         $whereBBB = Test::where('text', 'bbb');
         // getをつけると、コレクション型となる
-        $whereBBB = Test::where('text', 'bbb')->get();
+        // $whereBBB = Test::where('text', 'bbb')->get();
 
-        dd($values, $count, $first, $whereBBB);
+
+        // クエリビルダ
+        $queryBuilder = DB::table('tests')->where('text', '=' ,'bbb')
+        ->select('id', 'text')
+        ->get();
+        // getをつけないと、Builderオブジェクトとなる。クエリの途中の状態のようなイメージ。
+
+        dd($values, $count, $first, $whereBBB, $queryBuilder);
         // dd($values); // デバッグ用。これで中身を確認できる。dd = die + dump
 
         return view('tests.test', compact('values'));
