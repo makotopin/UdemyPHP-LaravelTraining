@@ -10,6 +10,7 @@ class TestController extends Controller
 {
     public function index()
     {
+        dd('test');
         // Eloquant。コレクション型となる
         $values = Test::all();
 
