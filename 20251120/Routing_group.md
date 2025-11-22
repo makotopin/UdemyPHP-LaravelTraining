@@ -70,3 +70,9 @@ Route::controller(OrderController::class)->group(function () {
 
 本当にこれが動くのか確認する
 ContactFormController.phpのindexを以下のように。
+```    public function index()
+    {
+        return view('contacts.index');
+    }```
+かつ、views配下にcontacts/index.blade.phpを用意して、表示されるかを確認する。
+なお、未ログイン状態でログイン画面に遷移するので、ちゃんとミドルウェアが効いているということになる。
