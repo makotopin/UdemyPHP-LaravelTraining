@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            詳細画面
+            編集画面
         </h2>
     </x-slot>
 
@@ -10,101 +10,98 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <section class="text-gray-600 body-font relative">
-                        {{$contact->id}} {{$contact->name}} {{$contact->title}} {{$contact->created_at}}
+                        <form method="POST" action="{{ route('contacts.store') }}">
+                            @csrf
                             <div class="container px-5 mx-auto">
                                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                                    <form method="get" action="{{ route('contacts.edit', [ 'id' => $contact->id ])}}">
+
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label for="name" class="leading-7 text-sm text-gray-600">氏名</label>
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
+                                        <input type="text" id="name" name="name" value="{{ $contact->name }}"
+                                            class="block w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300
                                                 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                                                 text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                                transition-colors duration-200 ease-in-out">{{$contact->name}}</div>
+                                                transition-colors duration-200 ease-in-out">
                                         </div>
                                     </div>
 
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label for="title" class="leading-7 text-sm text-gray-600">件名</label>
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
+                                        <input type="text" id="title" name="title" value="{{ $contact->title }}"
+                                            class="block w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300
                                                 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                                                 text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                                transition-colors duration-200 ease-in-out">{{$contact->title}}</div>
+                                                transition-colors duration-200 ease-in-out">
                                         </div>
                                     </div>
 
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
+                                        <input type="email" id="email" name="email" value="{{ $contact->email }}"
+                                            class="block w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300
                                                 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                                                 text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                                transition-colors duration-200 ease-in-out">{{$contact->email}}</div>
+                                                transition-colors duration-200 ease-in-out">
                                         </div>
                                     </div>
 
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label for="url" class="leading-7 text-sm text-gray-600">ホームページ</label>
-                                        @if($contact->url)
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
+                                        <input type="url" id="url" name="url" value="{{ $contact->url }}"
+                                            class="block w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300
                                                 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                                                 text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                                transition-colors duration-200 ease-in-out">{{$contact->url}}</div>
+                                                transition-colors duration-200 ease-in-out">
                                         </div>
-                                        @else
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
-                                                focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
-                                                text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                                transition-colors duration-200 ease-in-out">未設定</div>
-                                        @endif
-                                        </div>
+                                    </div>
 
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label class="leading-7 text-sm text-gray-600">性別</label><br>
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
-                                                focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
-                                                text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                                transition-colors duration-200 ease-in-out">{{$gender}}</div>
+                                        <input type="radio" name="gender" value="0" @if($contact->gender == 0) checked @endif>男性
+                                        <input type="radio" name="gender" value="1" @if($contact->gender == 1) checked @endif>女性
+                                        <input type="radio" name="gender" value="2" @if($contact->gender == 2) checked @endif>その他
                                         </div>
                                     </div>
 
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label for="age" class="leading-7 text-sm text-gray-600">年齢</label>
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
-                                        focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
-                                        text-base outline-none text-gray-700 py-1 px-3 leading-8
-                                        transition-colors duration-200 ease-in-out">{{$age}}</div>
+                                        <select name="age" id="age" class="block w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300" value="{{ $contact->age }}">
+                                                <option value="1" @if($contact->age == 1) selected @endif>~19歳</option>
+                                                <option value="2" @if($contact->age == 2) selected @endif>20~29歳</option>
+                                                <option value="3" @if($contact->age == 3) selected @endif>30~39歳</option>
+                                                <option value="4" @if($contact->age == 4) selected @endif>40~49歳</option>
+                                                <option value="5" @if($contact->age == 5) selected @endif>50~59歳</option>
+                                                <option value="6" @if($contact->age == 6) selected @endif>60歳~</option>
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="p-2 w-full">
                                         <div class="relative">
                                         <label for="contact" class="leading-7 text-sm text-gray-600">お問い合わせ内容</label>
-                                        <div class="block w-full bg-opacity-50 rounded border border-gray-300
+                                        <textarea id="contact" name="contact"
+                                            class="block w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300
                                                 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                                                 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6
-                                                transition-colors duration-200 ease-in-out">{{$contact->contact}}</div>
-                                    </div>
-
-                                    <div class="p-2 w-full">
-                                        <div class="relative">
-                                        <input type="checkbox" id="caution" name="caution">注意事項に同意する<br>
+                                                transition-colors duration-200 ease-in-out">{{ $contact->contact }}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="p-2 w-full">
                                         <button
                                         class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none
-                                                hover:bg-indigo-600 rounded text-lg">編集する</button>
+                                                hover:bg-indigo-600 rounded text-lg">Button</button>
                                     </div>
-                                    </form>
                                 </div>
                             </div>
-                    </section>
+                        </form>
+                      </section>
                 </div>
             </div>
         </div>
