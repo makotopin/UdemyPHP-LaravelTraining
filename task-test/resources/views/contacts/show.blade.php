@@ -102,6 +102,15 @@
                                                 hover:bg-indigo-600 rounded text-lg">編集する</button>
                                     </div>
                                     </form>
+                                    <form method="post" action="{{ route('contacts.destroy', ['id' => $contact->id]) }}" id="delete_{{ $contact->id }}">
+                                        @csrf
+                                        <a href="#" data-id="{{ $contact->id }}" onclick="deletePost(this)">
+                                    <div class="p-2 w-full">
+                                        <button
+                                        class="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none
+                                                hover:bg-red-600 rounded text-lg">削除する</button>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
                     </section>
@@ -109,4 +118,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePost(e){
+            'use strict'
+            if(confirm('本当に削除していいですか？')){
+                document.getElementById('delete_' + e.dataset.id).submit()
+            }
+        }
+    </script>
 </x-app-layout>
