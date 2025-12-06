@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ContactForm;
 use App\Services\CheckFormService;
+use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\UpdateContactRequest;
 
 class ContactFormController extends Controller
 {
@@ -36,7 +38,7 @@ class ContactFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreContactRequest $request)
     {
         // dd($request);
         ContactForm::create([
@@ -64,7 +66,7 @@ class ContactFormController extends Controller
 
         $gender = CheckFormService::checkGender($contact);
         $age = CheckFormService::checkAge($contact);
-        
+
         return view('contacts.show', compact('contact', 'gender', 'age'));
     }
 
@@ -83,11 +85,11 @@ class ContactFormController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateContactRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateContactRequest $request, $id)
     {
         $contact = ContactForm::find($id);
         $contact->name = $request->name;
