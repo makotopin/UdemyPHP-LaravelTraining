@@ -231,6 +231,8 @@ php artisan vendor:publish --tag=laravel-pagination
 ```
 resources/vendor/pagination/tailwind.blade.php を開く（お子のみのCSSでOK）
 その中に"Showing", "to", "of", "results"」などと書かれている部分があるので、そこを日本語に変更してあげる。
+
+
 #### 検索フォーム その1
 検索フォームを実装するときにはwhereで全文検索などができてlikeを使うと曖昧検索もできる。 
 まずはMAMPのSQLのところで実験をしてみる。ContactFormsテーブルには現在ダミーのデータが入っていると思うので、一番上のデータのnameの中にある名前（フェイカーが作ったものなので何が入っているかは見ないと分からない。）を入力してあげる。 
