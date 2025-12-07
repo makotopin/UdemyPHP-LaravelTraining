@@ -237,12 +237,12 @@ resources/vendor/pagination/tailwind.blade.php を開く（お子のみのCSSで
 検索フォームを実装するときにはwhereで全文検索などができてlikeを使うと曖昧検索もできる。 
 まずはMAMPのSQLのところで実験をしてみる。ContactFormsテーブルには現在ダミーのデータが入っていると思うので、一番上のデータのnameの中にある名前（フェイカーが作ったものなので何が入っているかは見ないと分からない。）を入力してあげる。 
 ```
-select * from `contact_forms` where `name` like `%ここに名前%` 
+select * from `contact_forms` where `name` like '%ここに名前%' 
 ```
 画面下部のクエリボックスを保持するという欄にチェックを付けって実行する。
 さらに
 ```
-select * from `contact_forms` where `name` like `%ここに名前%` and `name` like `%ここに2つ目の検索ワード%`
+select * from `contact_forms` where `name` like '%ここに名前%' and `name` like '%ここに2つ目の検索ワード%'
 ```
 とするとand検索ができる。
 
