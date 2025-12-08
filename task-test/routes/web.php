@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\ContactFormController;
 */
 
 Route::get('tests/test', [TestController::class, 'index']);
+Route::get('shops', [ ShopController::class, 'index' ])->name('shops.index');
 
 // Route::resource('contacts', ContactFormController::class, ['index'])->name('contacts.index');
 
