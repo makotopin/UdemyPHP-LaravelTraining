@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 20);
+            $table->integer('sort_no');
             $table->timestamps();
         });
     }
